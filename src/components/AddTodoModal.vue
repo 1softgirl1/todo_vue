@@ -60,9 +60,6 @@ import {ref, reactive, computed, watch, onMounted, onBeforeUnmount, nextTick} fr
         }
       }
   );
-  watch(() => __props.show, (val) => {
-    console.log('Modal show prop changed:', val);
-  });
 
 function onSubmit() {
     const text = form.text.trim();

@@ -1,13 +1,14 @@
 <template>
   <main>
     <section class="top">
-
       <div id="searchTask" class="form">
-        <label>
-          <input id="searchInput" type="text" placeholder="Search task"/>
-        </label>
-        <button id="searchButton" class="button" ><img src="./assets/magnifier_white.png"></button>
-        <button id="createTaskButton" @click="openCreate" class="button"><img src="./assets/plus.svg"></button>
+        <SearchBar
+            v-model="searchQuery"
+            @search="onSearch"
+        />
+        <button id="createTaskButton" @click="openCreate" class="button">
+          <img src="./assets/plus.svg" />
+        </button>
       </div>
 
       <AddTodoModal
@@ -17,7 +18,6 @@
           @update="handleUpdate"
           @close="closeModal"
       />
-
     </section>
     <section id="taskToDo" class="tasks">
       <p>Task to do - <span>{{ todoCount }}</span></p>
@@ -47,6 +47,7 @@
   import { ref, reactive, computed, watch, onMounted } from 'vue';
   import AddTodoModal from './components/AddTodoModal.vue';
   import TodoList from './components/TodoList.vue';
+  import SearchBar from './components/SearchBar.vue';
 
 
   const tasks = ref([]);
@@ -54,7 +55,6 @@
   const editingTask = ref(null);
   const searchQuery = ref('');
 
-  // загрузка из localStorage
   onMounted(() => {
     try {
       const saved = JSON.parse(localStorage.getItem('tasks') || '[]');
@@ -64,7 +64,6 @@
     }
   });
 
-  // watch: сохраняем изменения в localStorage
   watch(
       tasks,
       (newVal) => {
@@ -122,5 +121,9 @@
       isModalOpen.value = true;
     }
   }
+  function onSearch(query) {
+    searchQuery.value = query;
+  }
+
 </script>
 
