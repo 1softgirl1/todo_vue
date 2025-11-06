@@ -18,7 +18,7 @@ input[type="checkbox"] {
   border-radius: 0.25rem;
   background-color: var(--color-background);
   color: var(--color-secondary);
-  background-image: url('/src/check.svg');
+  background-image: url('/src/assets/check.svg');
   background-repeat: no-repeat;
   background-position: center;
 
@@ -33,7 +33,7 @@ input[type="checkbox"]:checked {
 
   width: 1rem;
   height: 1rem;
-  background-image: url('/src/check.svg') ;
+  background-image: url('/src/assets/check.svg') ;
   opacity: 0.5;
 }
 

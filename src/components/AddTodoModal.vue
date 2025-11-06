@@ -1,5 +1,3 @@
-
-
 <template>
   <div v-if="show" class="modal" @keydown.esc="onClose" tabindex="-1" ref="modalRoot" id="formModal">
     <div class="modal-content">
