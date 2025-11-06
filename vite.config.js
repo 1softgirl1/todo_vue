@@ -4,6 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
+  base: '/todo_vue/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // ← твой src
