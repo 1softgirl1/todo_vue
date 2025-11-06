@@ -53,19 +53,18 @@
 }
 
 
-#theme {
+
+#theme{
   @include flex-center();
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 3rem;
-  height: 3rem;
+
+  width: 40px;
+  height: 40px;
   border: none;
-
   cursor: pointer;
-  background: var(--icon-theme) no-repeat center;
-  background-size: cover;
-
+  background: none;
 
   @include respond-to(mobile) {
     width: 38px;
@@ -74,4 +73,12 @@
     bottom: 15px;
     right: 15px;
   }
+}
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
 }

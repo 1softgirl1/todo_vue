@@ -39,15 +39,17 @@
           :onlyDone="true"
       />
     </section>
+
   </main>
-  <button id='theme' class="switch" data-switch-dark aria-hidden></button>
+  <ThemeToggle />
 </template>
 
 <script setup>
-  import { ref, reactive, computed, watch, onMounted } from 'vue';
+  import { ref, computed, watch, onMounted } from 'vue';
   import AddTodoModal from './components/AddTodoModal.vue';
   import TodoList from './components/TodoList.vue';
   import SearchBar from './components/SearchBar.vue';
+  import ThemeToggle from "@/components/ThemeToggle.vue";
 
 
   const tasks = ref([]);
