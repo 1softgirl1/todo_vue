@@ -16,7 +16,7 @@
               required
               autocomplete="off"
           />
-          <button class="button" type="submit">{{ submitLabel }}</button>
+          <button id="addButton" class="button" type="submit">{{ submitLabel }}</button>
         </form>
       </div>
     </div>
