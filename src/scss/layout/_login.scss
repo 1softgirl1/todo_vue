@@ -1,0 +1,28 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.login-page {
+  width: 100%;
+  max-width: 500px;
+  padding-bottom: $spacing-md;
+  padding-top: $spacing-md;
+  @include flex-center(column, $spacing-sm);
+
+  align-items: flex-start;
+  @include respond-to(tablet) {
+    width: 100%;
+    max-width: 432px;
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+.login_input {
+  width: 100%;
+  max-width: 500px;
+
+}
+
