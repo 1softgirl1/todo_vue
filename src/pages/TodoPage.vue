@@ -8,7 +8,7 @@
             @search="onSearch"
         />
         <button id="createTaskButton" @click="openCreate" class="button">
-          <img src="./assets/plus.svg" />
+          <img src="../assets/plus.svg" />
         </button>
       </div>
 
@@ -99,7 +99,6 @@ function closeModal() {
 }
 
 function handleAdd(task) {
-  // Присваиваем владельца (email текущего пользователя)
   const ownerEmail = currentUser.value && currentUser.value.email ? currentUser.value.email : null
   const taskWithOwner = { ...task, owner: ownerEmail }
   store.addTask(taskWithOwner)

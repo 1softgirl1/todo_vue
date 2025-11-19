@@ -1,15 +1,39 @@
 <template>
-  <nav class="menu">
-    <router-link to="/login">Login</router-link>
-    <router-link to="/register">Register</router-link>
-    <router-link to="/todos">Todo</router-link>
-  </nav>
 
-  <router-view />
+
+  <nav class="menu">
+    <router-link to="/login" v-if="this.$route.path !== '/todos'">Login</router-link>
+    <router-link to="/register" v-if="this.$route.path !== '/todos'">Register</router-link>
+    <router-link to="/todos"  v-if="this.$route.path !== '/todos'">Todo</router-link>
+    <router-link to="/about"  v-if="this.$route.path !== '/todos'">About</router-link>
+    <router-link id="logout" to="/login" v-if="this.$route.path == '/todos'">Logout</router-link>
+  </nav>
+    <router-view />
+  <ThemeToggle></ThemeToggle>
 </template>
 
+<script setup>
+import { useUserStore } from '@/stores/useUserStore.js'
+import { useRouter } from 'vue-router'
+import ThemeToggle from "@/components/ThemeToggle.vue";
 
-<script>
+const userStore = useUserStore()
+const router = useRouter()
 
+function logout() {
+  userStore.logoutUser()
+  router.push('/login')
+}
 
 </script>
+
+<style lang="scss" scoped>
+.menu{
+  @include flex-center(row, $spacing-md);
+  margin-top: 30px;
+}
+.router-link {
+  color: red;
+}
+
+</style>

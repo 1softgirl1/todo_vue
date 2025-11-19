@@ -54,7 +54,7 @@ export const useUserStore = defineStore('useUserStore', () => {
         saveCurrentUser()
     }
 
-    function logout() {
+    function logoutUser() {
         currentUser.value = null
         saveCurrentUser()
     }
@@ -69,6 +69,6 @@ export const useUserStore = defineStore('useUserStore', () => {
         getUserByEmail,
         registerUser,
         loginUser,
-        logout
+        logoutUser
     }
 })
