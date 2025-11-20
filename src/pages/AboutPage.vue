@@ -4,8 +4,11 @@
 
     <transition name="fade" appear>
       <div class="about-text" v-if="showText">
+        <br>
         <p>Привет! Ты попал на страницу About моего великолепного, невероятного To-Do List’а, сделанного на Vue.</p>
+        <br>
         <p>Здесь ты можешь:</p>
+        <br>
         <transition-group name="bounce" tag="ul" class="bounce-list">
           <li
               v-for="(item, index) in items"
@@ -57,10 +60,12 @@ function logout() {
 <style lang="scss" scoped>
 
 .about {
+
   @include flex-center(column);
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+
 
   padding-inline: 10px;
   height: 300px;
@@ -75,6 +80,40 @@ function logout() {
   &:hover {
     transform: scale(1.03);
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  @include respond-to(tablet) {
+    width: 100%;
+    max-width: 432px;
+    font-size: 10pt;
+    align-items: center;
+
+  }
+
+  @include respond-to(mobile) {
+
+    width: 100%;
+    max-width: 320px;
+    padding-inline: 5px;
+    font-size: 10px;
+    align-items: center;
+    height: 350px;
+
+  }
+  p {
+    font-size: 14px;
+  }
+  li {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  h1 {
+    margin-top: 10px;
+    padding-inline: 10px;
+  }
+  .about-text {
+    padding: 10px;
+
   }
 
 
