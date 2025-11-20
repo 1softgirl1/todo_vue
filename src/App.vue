@@ -80,7 +80,7 @@ console.log(userStore.users)
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
   }
 }
