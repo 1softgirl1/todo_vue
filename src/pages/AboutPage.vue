@@ -1,5 +1,7 @@
 <template>
   <div class="about">
+
+
     <h1>About (или почему этот To-Do List вообще существует)</h1>
 
     <transition name="fade" appear>
