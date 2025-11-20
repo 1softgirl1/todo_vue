@@ -58,6 +58,8 @@ function logout() {
 </script>
 
 <style lang="scss" scoped>
+@use '../scss/utils/variables' as *;
+@use '../scss/utils/mixins' as *;
 
 .about {
 
