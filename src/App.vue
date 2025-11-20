@@ -6,7 +6,15 @@
     <router-link to="/register" v-if="this.$route.path !== '/todos'">Register</router-link>
     <router-link to="/todos"  v-if="this.$route.path !== '/todos'">Todo</router-link>
     <router-link to="/about"  v-if="this.$route.path !== '/todos'">About</router-link>
-    <router-link id="logout" to="/login" v-if="this.$route.path == '/todos'">Logout</router-link>
+    <router-link
+        id="logout"
+        to="/login"
+        @click="logout"
+        v-if="$route.path === '/todos'"
+    >
+      Logout
+    </router-link>
+
   </nav>
     <router-view />
   <ThemeToggle></ThemeToggle>
@@ -19,6 +27,8 @@ import ThemeToggle from "@/components/ThemeToggle.vue";
 
 const userStore = useUserStore()
 const router = useRouter()
+console.log(userStore.currentUser)
+console.log(userStore.users)
 
 function logout() {
   userStore.logoutUser()

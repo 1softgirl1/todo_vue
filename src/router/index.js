@@ -9,7 +9,7 @@ import AboutPage from "@/pages/AboutPage.vue";
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/todo_vue/'),
     routes: [
         { path: '/', redirect: '/about' },
 
