@@ -10,7 +10,7 @@
 - Vue 3 (Composition API)
 - Vite — сборка и запуск проекта
 - SASS (SCSS) — оформление интерфейса
-- JavaScript
+- TypeScript (файлы проекта подготовлены для TS)
 
 
 ## Архитектура проекта (важные файлы и папки)
@@ -19,7 +19,7 @@
 
 - `index.html` — точка входа приложения
 - `src/`
-  - `main.js` — инициализация приложения
+  - `main.ts` — инициализация приложения
   - `App.vue` — корневой компонент
   - `components/` — каталог компонент
     - `TodoItem.vue` — компонент отдельной задачи
@@ -28,9 +28,9 @@
     - `SearchBar.vue` — поиск по задачам
     - `ThemeToggle.vue` — переключатель темы
   - `pages/` — страницы приложения (`LoginPage.vue`, `RegisterPage.vue`, `TodoPage.vue`, `AboutPage.vue`)
-  - `router/index.js` — маршрутизация
+  - `router/index.ts` — маршрутизация
+  - `stores/` — стейты (Pinia): `useDataStore.ts`, `useUserStore.ts`
   - `stores/` — простые сторы для данных и пользователя
-- `assets/` — иконки и изображения
 - `scss/` — все стили проекта, структурированные по папкам (base, components, layout, themes, utils)
 
 
@@ -44,11 +44,41 @@
 - Переключение темы интерфейса (светлая / тёмная)
 - Модальное окно для создания/редактирования задач
 
-
 ## Сборка и деплой (CI / CD)
 
-Сборка и деплой проекта автоматизированы через CI/CD (GitHub Actions). В репозитории настроен workflow (например, `.github/workflows/deploy.yml`), который запускает сборку и деплой при пуше в конкретную ветку (в вашем случае — `todo_vue_edition`).
-
+Сборка и деплой проекта автоматизированы через CI/CD (например, GitHub Actions). В репозитории может быть workflow-файл `.github/workflows/deploy.yml`, который запускает сборку и деплой при пуше в указанную ветку.
 Деплой выполнен на GitHub Pages: https://1softgirl1.github.io/todo_vue/
 
+
+## Инструкция по локальному запуску
+
+1. Установите зависимости
+
+```cmd
+cd C:\path\to\todo_vue
+npm install
+```
+
+2. Запуск в режиме разработки
+
+```cmd
+npm run dev
+```
+
+Откройте указанный адрес (обычно http://localhost:5173) в браузере.
+
+3. Сборка (production)
+
+```cmd
+npm run build
+```
+
+
+4. Линтинг и автофиксы
+
+```cmd
+npm run lint       // проверка
+npm run lint:fix   // попытаться исправить автоматически
+npm run format     // prettier
+```
 

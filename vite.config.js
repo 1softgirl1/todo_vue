@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/todo_vue/',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // ← твой src
+      '@': path.resolve(__dirname, 'src'),
       'base': path.resolve(__dirname, './src/scss/base'),
       'components': path.resolve(__dirname, './src/scss/components'),
       'layout': path.resolve(__dirname, './src/scss/layout'),

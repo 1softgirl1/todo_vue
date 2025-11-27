@@ -3,27 +3,29 @@
     <div class="login-page">
       <form class="register-form" @submit.prevent="onSubmit" novalidate>
         <input
-            class="login_input"
-            type="email"
-            v-model="email"
-            @blur="touchedEmail = true"
-            placeholder="Email"
-            aria-label="Email"
-            required
+          class="login_input"
+          type="email"
+          v-model="email"
+          @blur="touchedEmail = true"
+          placeholder="Email"
+          aria-label="Email"
+          required
         />
 
-        <p v-if="touchedEmail && !isValidEmail" class="validation-error">Некорректный E-mail</p>
+        <p v-if="touchedEmail && !isValidEmail" class="validation-error">
+          Некорректный E-mail
+        </p>
 
         <label class="input-group">
           <input
-              class="login_input"
-              type="password"
-              v-model="password"
-              @blur="touchedPassword = true"
-              placeholder="Пароль"
-              aria-label="Пароль"
-              required
-              minlength="6"
+            class="login_input"
+            type="password"
+            v-model="password"
+            @blur="touchedPassword = true"
+            placeholder="Пароль"
+            aria-label="Пароль"
+            required
+            minlength="6"
           />
         </label>
 
@@ -31,67 +33,64 @@
           {{ errorMessage }}
         </p>
 
-
         <button
-            id="register"
-            class="button"
-            type="submit"
-            :disabled="!canSubmit"
+          id="register"
+          class="button"
+          type="submit"
+          :disabled="!canSubmit"
         >
           {{ submitLabel }}
         </button>
       </form>
     </div>
   </section>
-
 </template>
 
-<script setup>
-  import { ref, computed } from 'vue';
-  import { useUserStore } from '@/stores/useUserStore.js'
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
+<script setup lang="ts">
+import { ref, computed, Ref } from 'vue'
+import { useUserStore } from '@/stores/useUserStore'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-  const store = useUserStore()
-  const email = ref('');
-  const password = ref('');
-  const errorMessage = ref('')
+const store = useUserStore()
+const email: Ref<string> = ref('')
+const password: Ref<string> = ref('')
+const errorMessage: Ref<string> = ref('')
 
-  const touchedEmail = ref(false);
-  const touchedPassword = ref(false);
+const touchedEmail = ref(false)
+const touchedPassword = ref(false)
 
-  const submitLabel = 'Log in';
+const submitLabel: string = 'Log in'
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const isValidEmail = computed(() => emailRegex.test(email.value));
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-  const canSubmit = computed(() => isValidEmail.value);
+const isValidEmail = computed((): boolean => emailRegex.test(email.value))
+const canSubmit = computed((): boolean => isValidEmail.value)
 
-  async function onSubmit() {
-    errorMessage.value = ''
+async function onSubmit(): Promise<void> {
+  errorMessage.value = ''
 
-    try {
-      store.loginUser(email.value, password.value)
-    } catch (err) {
-      errorMessage.value = err.message
-      return
-    }
-
-    touchedEmail.value = true
-    touchedPassword.value = true
-
-    if (!canSubmit.value) return
-
-    console.log('Log in:', { email: email.value, password: password.value })
-
-    email.value = ''
-    password.value = ''
-
-    touchedEmail.value = false
-    touchedPassword.value = false
-    router.push('/todos')
+  try {
+    await store.loginUser(email.value, password.value)
+  } catch (err: any) {
+    errorMessage.value = err?.message ?? 'Ошибка при входе'
+    return
   }
 
+  touchedEmail.value = true
+  touchedPassword.value = true
+
+  if (!canSubmit.value) return
+
+  console.log('Log in:', { email: email.value, password: password.value })
+
+  email.value = ''
+  password.value = ''
+  touchedEmail.value = false
+  touchedPassword.value = false
+
+  router.push('/todos')
+}
 </script>
 
 <style scoped>
@@ -104,11 +103,9 @@
 .register-form .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-
 }
-.register-form .button{
+.register-form .button {
   width: 100%;
-
 }
 .register-form {
   width: 100%;
@@ -116,6 +113,4 @@
   flex-direction: column;
   gap: 10px;
 }
-
-
 </style>

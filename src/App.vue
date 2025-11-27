@@ -2,7 +2,9 @@
   <nav class="menu">
     <router-link to="/about" v-if="route.path !== '/todos'">About</router-link>
     <router-link to="/login" v-if="route.path !== '/todos'">Login</router-link>
-    <router-link to="/register" v-if="route.path !== '/todos'">Register</router-link>
+    <router-link to="/register" v-if="route.path !== '/todos'"
+      >Register</router-link
+    >
     <router-link to="/todos" v-if="route.path !== '/todos'">Todo</router-link>
     <button id="logout" @click="logout" v-if="route.path === '/todos'">
       Logout
@@ -13,24 +15,28 @@
   <ThemeToggle />
 </template>
 
-<script setup>
-import { useUserStore } from '@/stores/useUserStore.js'
-import { useRouter, useRoute } from 'vue-router'
-import ThemeToggle from "@/components/ThemeToggle.vue";
+<script setup lang="ts">
+import { useUserStore } from '@/stores/useUserStore'
+import {
+  useRouter,
+  useRoute,
+  type Router,
+  type RouteLocationNormalizedLoaded
+} from 'vue-router'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const userStore = useUserStore()
-const router = useRouter()
-const route = useRoute()
+const router: Router = useRouter()
+const route: RouteLocationNormalizedLoaded = useRoute()
 
-function logout() {
+function logout(): void {
   userStore.logoutUser()
-  router.push('/login')
+  void router.push('/login')
 }
 
+// оставил логи для отладки
 console.log(userStore.currentUser)
 console.log(userStore.users)
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -85,6 +91,3 @@ console.log(userStore.users)
   }
 }
 </style>
-
-
-

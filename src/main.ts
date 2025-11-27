@@ -9,7 +9,4 @@ import router from './router'
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-createApp(App)
-    .use(pinia)
-    .use(router)
-    .mount('#app')
+createApp(App).use(pinia).use(router).mount('#app')

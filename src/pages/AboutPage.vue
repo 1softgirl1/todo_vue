@@ -1,59 +1,57 @@
 <template>
   <div class="about">
-
-
     <h1>About (или почему этот To-Do List вообще существует)</h1>
 
     <transition name="fade" appear>
       <div class="about-text" v-if="showText">
-        <br>
-        <p>Привет! Ты попал на страницу About моего великолепного, невероятного To-Do List’а, сделанного на Vue.</p>
-        <br>
+        <br />
+        <p>
+          Привет! Ты попал на страницу About моего великолепного, невероятного
+          To-Do List’а, сделанного на Vue.
+        </p>
+        <br />
         <p>Здесь ты можешь:</p>
-        <br>
+        <br />
         <transition-group name="bounce" tag="ul" class="bounce-list">
           <li
-              v-for="(item, index) in items"
-              :key="index"
-              :style="{'--i': index}"
+            v-for="(item, index) in items"
+            :key="index"
+            :style="{ '--i': index }"
           >
             {{ item }}
           </li>
         </transition-group>
-
       </div>
     </transition>
-
   </div>
 
   <ThemeToggle />
 </template>
 
-<script setup>
-import { useUserStore } from '@/stores/useUserStore.js'
+<script setup lang="ts">
+import { useUserStore } from '@/stores/useUserStore'
 import { useRouter } from 'vue-router'
-import ThemeToggle from "@/components/ThemeToggle.vue";
+import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const userStore = useUserStore()
 const router = useRouter()
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, Ref } from 'vue'
 
-const showText = ref(false)
+const showText: Ref<boolean> = ref(false)
 
 onMounted(() => {
   showText.value = true
 })
 
-const items = [
+const items: string[] = [
   'добавлять задачи (и чувствовать себя продуктивным ровно 4 секунды);',
   'удалять задачи (потому что они мешают жить);',
   'отмечать выполнение (главная кнопка для самооценки);',
   'менять тему (прям как 2 постара к концерту иц)'
 ]
 
-
-function logout() {
+function logout(): void {
   userStore.logoutUser()
   router.push('/login')
 }
@@ -64,12 +62,10 @@ function logout() {
 @use '../scss/utils/mixins' as *;
 
 .about {
-
   @include flex-center(column);
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-
 
   padding-inline: 10px;
   height: 300px;
@@ -79,29 +75,28 @@ function logout() {
   background-color: var(--color-background);
   margin-bottom: 16px;
   margin-top: 50px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
   @include respond-to(tablet) {
     width: 100%;
     max-width: 432px;
     font-size: 10pt;
     align-items: center;
-
   }
 
   @include respond-to(mobile) {
-
     width: 100%;
     max-width: 320px;
     padding-inline: 5px;
     font-size: 10px;
     align-items: center;
     height: 350px;
-
   }
   p {
     font-size: 14px;
@@ -117,10 +112,7 @@ function logout() {
   }
   .about-text {
     padding: 10px;
-
   }
-
-
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -133,21 +125,19 @@ function logout() {
   transition: all 1s ease;
 }
 
-
 .bounce-enter-from {
   opacity: 0;
   transform: translateY(20px) scale(0.95);
 }
 
 .bounce-enter-active {
-  animation: bounce-in 0.6s cubic-bezier(.17,.67,.46,1.35) forwards;
+  animation: bounce-in 0.6s cubic-bezier(0.17, 0.67, 0.46, 1.35) forwards;
 }
 
 .bounce-enter-to {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-
 
 .bounce-list li {
   animation-delay: calc(var(--i) * 110ms) !important;
@@ -169,8 +159,4 @@ function logout() {
     transform: translateY(0) scale(1);
   }
 }
-
-
-
-
 </style>
